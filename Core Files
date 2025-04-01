@@ -1,0 +1,44 @@
+#honeypot.py (IoT Honeypot Simulation)
+
+import socket
+import threading
+import time
+
+# Configuration
+HOST = "0.0.0.0"  # Listen on all interfaces
+PORT = 8080
+REAL_PASSWORD = "admin123"
+LOG_FILE = "attack_logs.txt"
+
+# Initialize log file
+with open(LOG_FILE, "w") as f:
+    f.write("")  # Clear previous logs
+
+def handle_client(client, addr):
+    try:
+        client.send(b"Welcome to Fake IoT Device. Enter password: ")
+        password_attempt = client.recv(1024).decode().strip()
+        
+        if password_attempt == REAL_PASSWORD:
+            client.send(b"Access granted (but this is a trap!)\n")
+        else:
+            client.send(b"Access denied (logging your attempt...)\n")
+            with open(LOG_FILE, "a") as f:
+                f.write(f"[{time.ctime()}] Attack from {addr[0]} | Password tried: '{password_attempt}'\n")
+    finally:
+        client.close()
+
+def start_honeypot():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((HOST, PORT))
+    server.listen(5)
+    print(f"[HONEYPOT] Running on {HOST}:{PORT} (Waiting for attackers...)")
+
+    while True:
+        client, addr = server.accept()
+        thread = threading.Thread(target=handle_client, args=(client, addr))
+        thread.daemon = True
+        thread.start()
+
+if __name__ == "__main__":
+    start_honeypot()
