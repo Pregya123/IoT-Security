@@ -1,0 +1,21 @@
+#log_monitor.py (Real-Time Log Monitor)
+
+import time
+from IPython.display import clear_output  # Remove if not using Jupyter
+
+LOG_FILE = "attack_logs.txt"
+
+def monitor_logs():
+    try:
+        with open(LOG_FILE, "r") as f:
+            logs = f.read()
+            clear_output(wait=True)  # Remove if not in Jupyter
+            print("=== LIVE ATTACK LOGS ===")
+            print(logs if logs else "No attacks detected yet.")
+    except FileNotFoundError:
+        print("Log file not found. Run the honeypot first!")
+
+if __name__ == "__main__":
+    while True:
+        monitor_logs()
+        time.sleep(3)  # Refresh every 3 seconds
