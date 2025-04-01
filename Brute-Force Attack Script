@@ -1,0 +1,24 @@
+#attacker_simulation.py (Brute-Force Attack Script)
+
+import socket
+
+def simulate_attacker():
+    target_ip = "localhost"  # Change to honeypot IP if remote
+    target_port = 8080
+    common_passwords = ["admin", "password", "123456", "iot", "root"]
+    
+    print("[ATTACKER] Starting brute-force attack...")
+    for pwd in common_passwords:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((target_ip, target_port))
+            s.recv(1024)  # Get password prompt
+            s.send(pwd.encode())
+            response = s.recv(1024).decode()
+            print(f"Tried '{pwd}': {response.strip()}")
+            s.close()
+        except Exception as e:
+            print(f"Failed to attack: {str(e)}")
+
+if __name__ == "__main__":
+    simulate_attacker()
