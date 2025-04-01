@@ -1,27 +1,27 @@
-IoT Security Honeypot & Threat Detection System
+# **IoT Security Honeypot & Threat Detection System**  
 
-[IoT Security](https://img.shields.io/badge/IoT-Security-blue) [Python](https://img.shields.io/badge/Python-3.8%2B-green) [MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-red)  
+![IoT Security](https://img.shields.io/badge/IoT-Security-blue) ![Python](https://img.shields.io/badge/Python-3.8%2B-green) ![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-red)  
 
-A real-time IoT security monitoring system that simulates attacks, detects anomalies, and integrates advanced cybersecurity mechanisms like **AI-powered threat detection, blockchain-based tamper-proof logs, and MITRE ATT&CK mapping**.  
-
----
-
-📌 Key Features  
-
-✅ IoT Honeypot – Simulates vulnerable devices to attract & analyze attacks.  
-✅ Real-Time Log Monitoring – Live tracking of malicious activities.  
-✅ Rate Limiter – Blocks brute-force attacks by limiting login attempts.  
-✅ Live Attack Dashboard – Visualizes threats using **Matplotlib**.  
-✅ AI-Powered Anomaly Detection – Uses **Isolation Forest & Autoencoders** to detect zero-day attacks.  
-✅ MITRE ATT&CK Framework Mapping – Classifies attacks using globally recognized tactics.  
-✅ Blockchain for Tamper-Proof Logs – Ensures log integrity with **SHA-256 hashing**.  
-✅ Threat Intelligence Feed – Cross-references logs with **AlienVault OTX** for known malicious IPs.  
+A **real-time IoT security monitoring system** that simulates attacks, detects anomalies, and integrates advanced cybersecurity mechanisms like **AI-powered threat detection, blockchain-based tamper-proof logs, and MITRE ATT&CK mapping**.  
 
 ---
 
-🚀 Quick Start
+## **📌 Key Features**  
 
-Prerequisites 
+✅ **IoT Honeypot** – Simulates vulnerable devices to attract & analyze attacks.  
+✅ **Real-Time Log Monitoring** – Live tracking of malicious activities.  
+✅ **Rate Limiter** – Blocks brute-force attacks by limiting login attempts.  
+✅ **Live Attack Dashboard** – Visualizes threats using **Matplotlib**.  
+✅ **AI-Powered Anomaly Detection** – Uses **Isolation Forest & Autoencoders** to detect zero-day attacks.  
+✅ **MITRE ATT&CK Framework Mapping** – Classifies attacks using globally recognized tactics.  
+✅ **Blockchain for Tamper-Proof Logs** – Ensures log integrity with **SHA-256 hashing**.  
+✅ **Threat Intelligence Feed** – Cross-references logs with **AlienVault OTX** for known malicious IPs.  
+
+---
+
+## **🚀 Quick Start**  
+
+### **Prerequisites**  
 - Python 3.8+  
 - Libraries: `tensorflow`, `scikit-learn`, `pandas`, `matplotlib`, `requests`  
 
@@ -103,9 +103,8 @@ MIT License – Free for research and commercial use.
 
 ## **📬 Contact**  
 For questions or contributions:  
-📧 Email: your.email@example.com  
-🐦 Twitter: [@YourHandle](https://twitter.com/YourHandle)  
-
+📧 Email: ganjoo.pregya@gmail.com
+Socials: majestic._maven.0 (Instagram)
 ---
 
 **🌟 Star this repo if you find it useful!**  
