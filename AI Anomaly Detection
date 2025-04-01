@@ -1,0 +1,48 @@
+# anomaly_detection.py (AI Anomaly Detection)
+
+import pandas as pd
+import numpy as np
+from sklearn.ensemble import IsolationForest
+import matplotlib.pyplot as plt
+
+# Load or simulate logs (if attack_logs.txt doesn't exist)
+try:
+    logs = pd.read_csv("attack_logs.txt", sep="|", header=None, 
+                       names=["Time", "IP", "Password"])
+except FileNotFoundError:
+    print("No attack logs found. Simulating sample data...")
+    data = {
+        "Time": pd.date_range(start="2023-01-01", periods=50, freq="H"),
+        "IP": ["192.168.1." + str(np.random.randint(1, 5)) for _ in range(50)],
+        "Password": np.random.choice(["admin", "123456", "password", "root", "iot"], 50)
+    }
+    logs = pd.DataFrame(data)
+
+# Feature Engineering
+logs["Attempts"] = logs.groupby("IP")["IP"].transform("count")  # Count attacks per IP
+logs["Password_Entropy"] = logs["Password"].apply(
+    lambda x: -sum((x.count(c)/len(x))*np.log2(x.count(c)/len(x)) for c in set(x))
+)
+
+# Train Anomaly Detection Model
+features = logs[["Attempts", "Password_Entropy"]]
+clf = IsolationForest(contamination=0.2, random_state=42)  # 20% anomalies
+logs["Anomaly"] = clf.fit_predict(features)
+logs["Anomaly"] = np.where(logs["Anomaly"] == -1, 1, 0)  # 1=Anomaly, 0=Normal
+
+# Visualize Results
+plt.figure(figsize=(12, 6))
+plt.scatter(
+    logs.index, logs["Attempts"],
+    c=logs["Anomaly"], cmap="coolwarm", s=100, alpha=0.7
+)
+plt.colorbar(label="Anomaly (1=Suspicious)")
+plt.title("IoT Attack Anomaly Detection")
+plt.xlabel("Event Index")
+plt.ylabel("Attack Attempts per IP")
+plt.grid(True)
+plt.show()
+
+# Print Anomalies
+print("\nDetected Anomalies:")
+print(logs[logs["Anomaly"] == 1][["Time", "IP", "Password", "Attempts"]])
